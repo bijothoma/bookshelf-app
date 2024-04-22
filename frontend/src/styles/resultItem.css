@@ -1,0 +1,22 @@
+.resultItem{
+    display:flex;
+    width:500px;
+    align-items: center;
+    flex-direction: row;
+    gap:10px;
+    border: 1px solid grey;
+    margin-bottom:0px;
+    margin-top:0px;
+    padding:2px;
+}
+.thumb-nail {
+    max-width: 40px;
+  }
+.book_title{
+    font-size: 16px;
+    font-weight: bold;
+}
+.book_details{
+    display: flex;
+    flex-direction:column;
+}

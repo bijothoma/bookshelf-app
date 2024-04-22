@@ -1,0 +1,98 @@
+.login-container{
+    display:flex;
+    margin:auto;
+    margin-top:200px;
+    background-color: #b9b0b0e2;
+    padding-bottom: 30px;
+    width:600px;
+    height:50vh;
+    flex-direction: column;
+}
+.signin-credentials{
+    margin-top:30px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap:25px;
+}
+.header{
+    display:flex;
+    flex-direction: column;
+    margin-top:30px;
+    gap: 9px;
+    text-align: center;
+    width: 100%;
+}
+.signin-title{
+    font-size:48px;
+    font-weight:700;
+    color:rgb(62, 6, 118);
+    text-align:center;
+}
+
+.inputs{
+    display:flex;
+    padding:10px;
+    width:400px;
+    height:60px;
+    background-color: rgb(209, 207, 207);
+    align-items: center;
+
+}
+.inputs img{
+    margin : 0 10px;
+    width:30px;
+}
+.inputs input{
+    background: transparent;
+    border:none;
+    width:300px;
+    margin-left:10px; 
+    height:50px;
+    border-radius:6px;
+    outline:none;
+    font-size: 19px;
+}
+
+.signin-buttons{
+    display:flex;
+    height:20px;
+    width:100%;
+    font-size: 16px;
+    font-weight: bold;
+    align-items: center;
+    margin-top:50px;
+    text-align: center;
+    justify-content: center;;
+}
+
+.submit {
+    border : 2px solid grey;
+    margin:20px;
+    text-align: center;
+    width:150px;
+    border-radius: 20px;
+    font-size:20px;
+    padding:10px;
+    background-color: #4e0ea9;
+    border:none;
+    color: #fff ;
+    font-weight:700;
+    cursor: pointer;
+}
+.grey {
+    background-color: #eaeaea;
+    color:#676767
+}
+.error{
+    width:300px;
+    background-color: #f34646;
+    color:#fff;
+    font-size: 16px;
+    border: none;
+    outline:none;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+}

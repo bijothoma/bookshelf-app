@@ -1,0 +1,31 @@
+nav{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #1b2430;
+    padding: 20px 80px;
+
+}
+.menu-list{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.menu-list li{
+    list-style: none;
+    padding: 0 20px;
+    position: relative;
+}
+.menu-list li a{
+    text-decoration: none;
+    font-size:1.3rem;
+    font-weight: 600;
+    color:#fff;
+    transition: 0.3s ease-in-out;
+}
+.menu-list li a:hover,
+.menu-list li a.active
+{
+    color:#17cf97;
+}
