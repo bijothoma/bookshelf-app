@@ -29,3 +29,15 @@
     flex-direction: column;
     margin-left:10px;
 }
+.visible {
+    display: block;
+  }
+  
+  .hidden {
+    display: none;
+  }
+.tableRows{
+    margin: 0 auto;
+    width:1200px;
+    margin-top:50px;
+}

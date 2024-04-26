@@ -9,6 +9,9 @@ import Bookshelf from "./pages/bookshelf";
 import Dashboard from "./pages/dashboard";
 import ErrorElement from "./pages/errorElement";
 import About from "./pages/about";
+import Logout from "./pages/logout";
+import Login from "./components/login";
+import { UserProvider } from "./services/userContext";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +34,14 @@ const router = createBrowserRouter([
       {
         path:"/about",
         element:<About />
+      },
+      // {
+      //   path:"/login",
+      //   element: <Login />
+      // },
+      {
+        path:"/logout",
+        element:<Logout />
       }
     ],
   },
@@ -39,7 +50,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
   </React.StrictMode>
 );
 

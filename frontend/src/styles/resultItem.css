@@ -1,4 +1,4 @@
-.resultItem{
+.resultItemSearch{
     display:flex;
     width:500px;
     align-items: center;
@@ -8,9 +8,13 @@
     margin-bottom:0px;
     margin-top:0px;
     padding:2px;
+    cursor:pointer;
 }
 .thumb-nail {
     max-width: 40px;
+  }
+  .thumbnail{
+    width:40px;
   }
 .book_title{
     font-size: 16px;

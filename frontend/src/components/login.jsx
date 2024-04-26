@@ -5,9 +5,12 @@ import password_icon from "../assets/password.png";
 import axios from "axios";
 import "../styles/login.css";
 import { Navigate } from "react-router-dom";
+import { useUser } from "../services/userContext";
 
 const Login = () => {
-  const [action, setAction] = useState("Sign Up");
+  const { userId, setUser } = useUser();
+  const { userName, setUserName} = useUser();
+  const [action, setAction] = useState("Login");
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -38,8 +41,12 @@ const Login = () => {
         console.log(res.message);
       } else{
         console.log(res.data);
+        console.log("id : " ,res.data._id);
         localStorage.setItem("userData",res.data);
-        window.location.reload(false);
+        setUser(res.data._id);
+        setUserName(res.data.name)
+        //window.location.reload(false);
+        window.location.href = '/';
       }
       
     } catch (error) {
@@ -48,6 +55,7 @@ const Login = () => {
   };
   const handleSignUp = async () => {
     setAction("Sign Up");
+    if (data.email === "") return;
     try {
       const url = "http://localhost:8080/api/users";
       const { data: res } = await axios.post(url, data);

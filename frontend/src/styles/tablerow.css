@@ -1,0 +1,40 @@
+.resultItemTable{
+    display:flex;
+    justify-content: space-between;
+    width:1200px;
+    align-items: center;
+    flex-direction: row;
+    gap:10px;
+    border: 1px solid grey;
+    margin-bottom:0px;
+    margin-top:0px;
+    padding:2px;
+}
+.thumb-nail {
+    max-width: 40px;
+    padding-left:2px;
+  }
+.book_title{
+    font-size: 16px;
+    font-weight: bold;
+    width:300px;
+}
+.book_authors{
+    width:150px;
+}
+.book_avRating{
+    width: 50px;
+}
+.book_rating{
+    width:200px;
+}
+.book_shelves{
+    width:180px;
+}
+.book_close{
+    width:30px;
+    cursor: pointer;
+}
+.book_addedDate{
+    width:80px;
+}
