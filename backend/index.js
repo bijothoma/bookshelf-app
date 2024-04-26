@@ -25,6 +25,10 @@ app.use(
   })
 );
 
+app.use((req,res,next) => {
+  res.setHeader("Access-Control-Allow-Origin", "https://bookshelf-app-frontend.onrender.com/");
+});
+
 //routes
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
