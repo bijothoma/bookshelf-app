@@ -19,7 +19,7 @@ const CurrentlyReadingBooks = () => {
 
   const updateCurrentlyReading = async (id, updateData) => {
     setLoading(true);
-    await UpdateBookFromShelf(id, updateData, setLoading);
+    await UpdateBookFromShelf(id,userId, updateData, setLoading);
     await fetchCurrentlyReading();
   };
 
