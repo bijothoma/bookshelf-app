@@ -39,12 +39,12 @@ export const fetchBooksByIds = async (bookIds) => {
 };
 
 //function to add a book to mongodb
-export const AddBookToMyShelf = async (id,userId) => {
+export const AddBookToMyShelf = async (id, userId) => {
   try {
-    const url = "http://localhost:8080/api/mybooks";
+    const url = `${process.env.REACT_APP_RENDER_PATH}/api/mybooks`;
     const { data: res } = await axios.post(url, {
       id: id,
-      userId: userId
+      userId: userId,
     });
   } catch (error) {
     console.log("Error in adding this book.." + error);
@@ -57,10 +57,10 @@ export const RemoveBookFromShelf = async (id, userId) => {
   try {
     const queryData = {
       id: id,
-      userId : userId
-    }
+      userId: userId,
+    };
     const queryParams = new URLSearchParams(queryData).toString();
-    const url = `http://localhost:8080/api/mybooks/delete?${queryParams}`;
+    const url = `${process.env.REACT_APP_RENDER_PATH}/api/mybooks/delete?${queryParams}`;
     const response = await axios.delete(url);
   } catch (error) {
     console.log("Error in deleting this book.." + error);
@@ -69,15 +69,20 @@ export const RemoveBookFromShelf = async (id, userId) => {
 
 //function to update a book
 
-export const UpdateBookFromShelf = async (id,userId, updateData, setLoading) => {
+export const UpdateBookFromShelf = async (
+  id,
+  userId,
+  updateData,
+  setLoading
+) => {
   try {
     const paramData = {
       id: id,
-      userId : userId
-    }
+      userId: userId,
+    };
     const queryParams = new URLSearchParams(paramData).toString();
     // Make PUT request to the API endpoint with the item ID and update data
-    const url = `http://localhost:8080/api/mybooks/update?${queryParams}`;
+    const url = `${process.env.REACT_APP_RENDER_PATH}/api/mybooks/update?${queryParams}`;
     await axios.put(url, updateData).then((response) => {
       console.log("Response data:", response.data);
     });
@@ -90,7 +95,7 @@ export const UpdateBookFromShelf = async (id,userId, updateData, setLoading) => 
 
 export const fetchMergedData = async (userId, setMyBooks, setLoading) => {
   try {
-    const url = `http://localhost:8080/api/mybooks/getAllMerged/${userId}`;
+    const url = `${process.env.REACT_APP_RENDER_PATH}/api/mybooks/getAllMerged/${userId}`;
     const response = await axios.get(url).then((res) => {
       return res;
     });
@@ -109,13 +114,11 @@ export const fetchQueryData = async (
 ) => {
   try {
     const queryParams = new URLSearchParams(queryData).toString();
-    const url = `http://localhost:8080/api/mybooks/getMergedBy?${queryParams}`;
+    const url = `${process.env.REACT_APP_RENDER_PATH}/api/mybooks/getMergedBy?${queryParams}`;
     //console.log(queryData);
-    const response = await axios
-      .get(url)
-      .then((res) => {
-        return res;
-      });
+    const response = await axios.get(url).then((res) => {
+      return res;
+    });
     return setCurrentlyReading(response.data);
   } catch (error) {
     console.log("Error in getting query data..");
