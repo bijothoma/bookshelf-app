@@ -126,3 +126,44 @@ export const fetchQueryData = async (
     setLoading(false);
   }
 };
+
+export const fetchReviewedBooks = async (userId,setReviewedBooks, setLoading) => {
+  try {
+    const url = `${process.env.REACT_APP_RENDER_PATH}/api/mybooks/getAllinArray/${userId}`;
+    const response = await axios.get(url).then((res) => {
+      return res;
+    });
+    setReviewedBooks(response.data);
+  } catch (error) {
+    console.log("Error in getting reviewed book data..");
+  } finally {
+    setLoading(false);
+  }
+};
+
+export const fetchNotFriends = async (setNotFriends, setLoading) => {
+  try {
+    const url = `${process.env.REACT_APP_RENDER_PATH}/api/friends/getNotFriends`;
+    const response = await axios.get(url).then((res) => {
+      return res;
+    });
+    setNotFriends(response.data);
+  } catch (error) {
+    console.log("Error in getting reviewed book data..");
+  } finally {
+    setLoading(false);
+  }
+};
+
+
+export const AddFriend = async (userId, friendId) => {
+  try {
+    const url = `${process.env.REACT_APP_RENDER_PATH}/api/friends`;
+    const { data: res } = await axios.post(url, {
+      userId: userId,
+      friendId: friendId,
+    });
+  } catch (error) {
+    console.log("Error in adding this friend.." + error);
+  }
+};

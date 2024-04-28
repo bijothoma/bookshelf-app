@@ -2,11 +2,16 @@ const router = require("express").Router();
 require("isomorphic-fetch");
 const { model } = require("mongoose");
 const MyBooks = require("../models/mybooks");
+const Friend = require("../models/friend");
 const { query } = require("express");
+const { fetchBooksByIds } = require("../services/googlebooks");
 
 router.post("/", async (req, res) => {
   try {
-    const book = await MyBooks.findOne({ id: req.body.id, userId : req.body.userId });
+    const book = await MyBooks.findOne({
+      id: req.body.id,
+      userId: req.body.userId,
+    });
     if (book)
       return res
         .status(409)
@@ -21,39 +26,12 @@ router.post("/", async (req, res) => {
 
 router.get("/getAll", async (req, res) => {
   try {
-    const myBooks = await MyBooks.find({userId : req.body.userId});
+    const myBooks = await MyBooks.find({ userId: req.body.userId });
     res.json(myBooks);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
-
-const fetchBookById = async (bookId) => {
-  const apiUrl = `https://www.googleapis.com/books/v1/volumes/${bookId}`;
-  try {
-    const response = await fetch(apiUrl).then((response) => {
-      return response.json();
-    });
-    return response;
-  } catch (error) {
-    console.error(`Error fetching book with ID ${bookId}:`, error);
-    return null;
-  }
-};
-
-// Function to fetch multiple books by IDs
-const fetchBooksByIds = async (bookIds) => {
-  try {
-    // Map bookIds to array of promises for fetching individual book details
-    const promises = bookIds.map((bookId) => fetchBookById(bookId));
-    // Execute promises concurrently and wait for all to resolve
-    const booksData = await Promise.all(promises);
-    return booksData.filter((book) => book !== null); // Filter out any null results
-  } catch (error) {
-    console.error("Error fetching books by IDs:", error);
-    return [];
-  }
-};
 
 const mergeBooks = async (myBooks) => {
   try {
@@ -67,6 +45,7 @@ const mergeBooks = async (myBooks) => {
       return {
         id: book.id,
         userId: book.userId,
+        userName: book.name,
         rating: book.rating,
         shelves: book.shelves,
         createdAt: book.createdAt,
@@ -85,8 +64,8 @@ const mergeBooks = async (myBooks) => {
     });
     return mergedBooks;
   } catch (error) {
-       console.error(`Error fetching merged books`, error);
-    return null; 
+    console.error(`Error fetching merged books`, error);
+    return null;
   }
 };
 
@@ -94,11 +73,11 @@ router.get("/getAllMerged/:userId", async (req, res) => {
   try {
     const userId = req.params.userId;
     console.log("user Id : ", userId);
-    const myBooks = await MyBooks.find({userId:userId});
+    const myBooks = await MyBooks.find({ userId: userId }).populate('user');
     const mBooks = mergeBooks(myBooks);
-    mBooks.then(data => {
+    mBooks.then((data) => {
       res.json(data);
-    })
+    });
   } catch (error) {
     console.error(`Error fetching merged books`, error);
     return null;
@@ -108,13 +87,35 @@ router.get("/getAllMerged/:userId", async (req, res) => {
 router.get("/getMergedBy", async (req, res) => {
   try {
     const queryData = req.query;
-    console.log("query data : ",queryData);
-    const myBooks = await MyBooks.find(queryData).then(res => {return res});
+    console.log("query data : ", queryData);
+    const myBooks = await MyBooks.find(queryData).populate('user').then((res) => {
+      return res;
+    });
     const mBooks = mergeBooks(myBooks);
-    mBooks.then(data => {
+    mBooks.then((data) => {
       //console.log("merged by : ",data);
       res.json(data);
-    })
+    });
+  } catch (error) {
+    console.error(`Error fetching merged books`, error);
+    return null;
+  }
+});
+
+//to get the books in the social card list
+router.get("/getAllinArray/:userId", async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    console.log("userId : ",userId);
+    const friendIds =  await Friend.find(userId).select('friendId');
+    const allBooks = await MyBooks.find({
+      userId: { $in: friendIds },
+      review: { $ne: null, $exists: true, $ne: "" },
+    }).populate('user').sort({ reviewedOn: -1 });
+    const mBooks = mergeBooks(allBooks);
+    mBooks.then((data) => {
+      res.json(data);
+    });
   } catch (error) {
     console.error(`Error fetching merged books`, error);
     return null;
@@ -151,10 +152,7 @@ router.put("/update", async (req, res) => {
 
     // Find the item by ID and update it
     // const updatedItem = await MyBooks.findByIdAndUpdate(itemId, updateData, { new: true });
-    const updatedItem = await MyBooks.findOneAndUpdate(
-      queryData,
-      updateData
-    );
+    const updatedItem = await MyBooks.findOneAndUpdate(queryData, updateData);
 
     if (!updatedItem) {
       return res.status(404).json({ message: "Item not found" });

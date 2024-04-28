@@ -12,6 +12,7 @@ import About from "./pages/about";
 import Logout from "./pages/logout";
 import Login from "./components/login";
 import { UserProvider } from "./services/userContext";
+import Friend from "./components/friend";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard />,
+      },
+      {
+        path: "/friends",
+        element: <Friend />,
       },
       {
         path:"/about",

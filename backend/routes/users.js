@@ -20,4 +20,15 @@ router.post("/", async (req, res) => {
     }
 });
 
+router.get("/getAll", async (req, res) => {
+    try {
+        const users = await User.find();
+        res.json(users);
+    } catch (error) {
+        res.status(500).send({message:"Internal server error"});
+    }
+});
+
+
+
 module.exports = router

@@ -6,6 +6,7 @@ const connection = require("./db");
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
 const mybooksRoutes = require("./routes/mybooks");
+const friendRoutes = require("./routes/friends");
 
 //connection
 
@@ -19,25 +20,25 @@ app.use((req, res, next) => {
 
 //middleware
 app.use(express.json());
-app.use(
-  cors({
-    origin: "https://bookshelf-app-frontend.onrender.com/",
-  })
-);
+app.use(cors({origin: "*"}))
+//{
+//   origin: "https://bookshelf-app-frontend.onrender.com/",
+// }
 
-app.use((req,res,next) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://bookshelf-app-frontend.onrender.com/");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
+// app.use((req,res,next) => {
+//   res.setHeader("Access-Control-Allow-Origin", "https://bookshelf-app-frontend.onrender.com/");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   next();
+// });
 
 //routes
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/mybooks", mybooksRoutes);
+app.use("/api/friends", friendRoutes);
 
 const port = process.env.PORT || 8080;
 

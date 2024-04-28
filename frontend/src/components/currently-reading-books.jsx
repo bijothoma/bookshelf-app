@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import CurrentlyReading from "./currently-reading";
 import { books } from "../api/data";
-import { fetchQueryData, UpdateBookFromShelf } from "../services/searchBooks";
+import { fetchQueryData, UpdateBookFromShelf, fetchReviewedBooks } from "../services/searchBooks";
 import "../styles/dashboard.css";
 import { useUser } from "../services/userContext";
+import SocialCard from "./socialCard";
 const CurrentlyReadingBooks = () => {
   const {userId, setUser} = useUser();
   const [data, setData] = useState([]);
+  const [reviewedBooks,setReviewedBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const queryData = {
     userId: userId,
@@ -17,14 +19,19 @@ const CurrentlyReadingBooks = () => {
     fetchQueryData(queryData, setData, setLoading);
   };
 
+  const fetchSocialCardBooks = () => {
+    fetchReviewedBooks(userId,setReviewedBooks, setLoading);
+  }
+
   const updateCurrentlyReading = async (id, updateData) => {
     setLoading(true);
-    await UpdateBookFromShelf(id,userId, updateData, setLoading);
-    await fetchCurrentlyReading();
+    UpdateBookFromShelf(id,userId, updateData, setLoading);
+    fetchCurrentlyReading();
   };
 
   useEffect(() => {
     fetchCurrentlyReading();
+    //fetchSocialCardBooks();
     console.log("User id : ", userId)
   }, []);
   return (
@@ -54,7 +61,35 @@ const CurrentlyReadingBooks = () => {
           </div>
         </div>
       )}
-      <div className="socialCard"></div>
+      <div className="socialCard">
+      {loading ? (
+        <div>loading..</div>
+      ) : (
+        <>
+        <div className="title">Updates</div>
+        <div className="updates">
+          {reviewedBooks.map((book) => {
+            <SocialCard 
+            key={book.id}
+            id={book.id}
+            friend={book.name}
+            title={book.title}
+            author={book.authors}
+            thumbnail={book.thumbnail}
+            mediumPic={book.mediumPic}
+            pageCount={book.pageCount}
+            currentPage={book.currentPage}
+            review={book.review}
+            rating={book.rating}
+            
+            />
+          })}
+        </div>        
+        </>
+
+      )
+    }
+      </div>
     </div>
   );
 };

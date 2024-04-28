@@ -19,7 +19,8 @@ const UpdateProgress = ({ id, currentPage, pageCount, review , displayUpdateProg
     const updateData = {
       currentPage : cPage,
       shelves : shelves,
-      review : reviewText
+      review : reviewText,
+      reviewedOn: new Date()
     }
     updateCurrentlyReading(id, updateData);
   };
