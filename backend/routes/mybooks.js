@@ -88,7 +88,7 @@ router.get("/getMergedBy", async (req, res) => {
   try {
     const queryData = req.query;
     console.log("query data : ", queryData);
-    const myBooks = await MyBooks.find(queryData).populate('user').then((res) => {
+    const myBooks = await MyBooks.find(queryData).then((res) => {
       return res;
     });
     const mBooks = mergeBooks(myBooks);
