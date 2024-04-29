@@ -133,7 +133,9 @@ export const fetchReviewedBooks = async (userId,setReviewedBooks, setLoading) =>
     const response = await axios.get(url).then((res) => {
       return res;
     });
-    setReviewedBooks(response.data);
+    console.log("fetch Social card : ", response.data);
+    //return setReviewedBooks(response.data);
+    return response.data;
   } catch (error) {
     console.log("Error in getting reviewed book data..");
   } finally {
@@ -158,11 +160,14 @@ export const fetchNotFriends = async (setNotFriends, setLoading) => {
 
 export const AddFriend = async (userId, friendId) => {
   try {
-    const url = `${process.env.REACT_APP_RENDER_PATH}/api/friends`;
-    const { data: res } = await axios.post(url, {
+    const friendData = {
       userId: userId,
-      friendId: friendId,
-    });
+      friendId : friendId
+    }
+    const queryParams = new URLSearchParams(friendData).toString();
+    const url = `${process.env.REACT_APP_RENDER_PATH}/api/friends?${queryParams}`;
+    const { data: res } = await axios.post(url);
+    //console.log("Add friend Data: ", data);
   } catch (error) {
     console.log("Error in adding this friend.." + error);
   }

@@ -9,6 +9,7 @@ const Friend = ({ friendsList }) => {
 
   const getNotfriends = async () => {
     await fetchNotFriends(setNotFriends, setLoading);
+    console.log(notFriends);
   };
 
   const addThisFriend = async (friendId) => {
@@ -30,9 +31,9 @@ const Friend = ({ friendsList }) => {
     <>
       <div>Add Friends here</div>
       <div className="friendSearch">
-        <select onSelect={handleSelect}>
+        <select onChange={handleSelect}>
           {notFriends.map((option, index) => (
-            <option key={index} value={option.id}>
+            <option key={index} value={option._id}>
               {option.name}
             </option>
           ))}

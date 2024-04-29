@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const mongoose = require("mongoose");
 require("isomorphic-fetch");
 const { model } = require("mongoose");
 const MyBooks = require("../models/mybooks");
@@ -44,8 +45,8 @@ const mergeBooks = async (myBooks) => {
       //console.log(details);
       return {
         id: book.id,
-        userId: book.userId,
-        userName: book.name,
+        userId: book.userId._id,
+        userName: book.userId.name,
         rating: book.rating,
         shelves: book.shelves,
         createdAt: book.createdAt,
@@ -58,6 +59,7 @@ const mergeBooks = async (myBooks) => {
             ? "N/A"
             : details.volumeInfo.averageRating,
         pageCount: details.volumeInfo.pageCount,
+        description: details.volumeInfo.description,
         currentPage: book.currentPage,
         review: book.review,
       };
@@ -73,7 +75,8 @@ router.get("/getAllMerged/:userId", async (req, res) => {
   try {
     const userId = req.params.userId;
     console.log("user Id : ", userId);
-    const myBooks = await MyBooks.find({ userId: userId }).populate('user');
+    //const myBooks = await MyBooks.find({ userId: userId }).populate('user');
+    const myBooks = await MyBooks.find({ userId: userId });
     const mBooks = mergeBooks(myBooks);
     mBooks.then((data) => {
       res.json(data);
@@ -106,14 +109,23 @@ router.get("/getMergedBy", async (req, res) => {
 router.get("/getAllinArray/:userId", async (req, res) => {
   try {
     const userId = req.params.userId;
-    console.log("userId : ",userId);
-    const friendIds =  await Friend.find(userId).select('friendId');
+    //console.log("in getAllinArray userId : ",userId);
+    const friendIds =  await Friend.find({userId: userId}).select('-_id friendId').exec();
+    const friendIdsArray = friendIds.map(friend => friend.friendId);
+    //const friends = await Friend.find({userid: userId}).exec();
+    //const friendIds = friends.map(friend => friend.friendId);
+    console.log("friend ids : ", friendIdsArray);
+    // const allBooks = await MyBooks.find({
+    //   userId: { $in: friendIds },
+    //   review: { $ne: null, $exists: true, $ne: "" },
+    // }).populate('user').sort({ reviewedOn: -1 });
     const allBooks = await MyBooks.find({
-      userId: { $in: friendIds },
-      review: { $ne: null, $exists: true, $ne: "" },
-    }).populate('user').sort({ reviewedOn: -1 });
+      userId: { $in: friendIdsArray },
+      review: { $ne: null, $ne: "" },
+    }).populate('userId').sort({ reviewedOn: -1 }).exec();    
     const mBooks = mergeBooks(allBooks);
     mBooks.then((data) => {
+      console.log("respones data in getallinarray : " ,data);
       res.json(data);
     });
   } catch (error) {

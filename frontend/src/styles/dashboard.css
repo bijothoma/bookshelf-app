@@ -1,4 +1,4 @@
-.dashboard{
+.dashboard_container{
     display:flex;
     flex-wrap:wrap;
     width:80%;
@@ -10,7 +10,7 @@
     margin-top:20px;
     /*margin-left:23px;*/
 }
-.currentlyReading, .socialCard {
+.currentlyReading, .socialCard_dashboard {
     flex:1;
     /* min-width:200px; */
     padding:20px;
@@ -20,6 +20,9 @@
     display:flex;
     /* justify-content: space-between; */
     margin-top:10px;
+}
+.socialCard_dashboard{
+  flex-direction: column;
 }
 
   .gr-book_title {

@@ -27,15 +27,17 @@ const Bookshelf = () => {
     await UpdateBookFromShelf(id,userId, updateObject,setLoading);
     refreshTable();
   }
-  const refreshTable = () => {
+  const refreshTable = async () => {
     //setTimeout(async() => {
       setLoading(true);
-      fetchMergedData(userId,setMyBooks, setLoading);
+      await fetchMergedData(userId,setMyBooks, setLoading);
+      console.log(myBooks);
     // }, 300);
   };
 
   useEffect(() => {
-    fetchMergedData(userId, setMyBooks, setLoading);
+    //fetchMergedData(userId, setMyBooks, setLoading);
+    refreshTable();
   }, []);
 
   return (

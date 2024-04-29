@@ -1,49 +1,55 @@
 import React from "react";
+import '../styles/socialcard.css';
 import ReactStars from "react-rating-stars-component";
+import TextToggle from "./textToggle";
 
-const SocialCard = (
+const SocialCard = ({
   id,
   friend,
-  thumbnail,
   title,
-  authors,
-  description,
+  author,
+  thumbnail,
+  mediumPic,
+  pageCount,
+  currentPage,
+  review,
   rating,
-  review
-) => {
+  description
+}) => {
   const ratingChanged = (newRating) => {};
-  const handleRead = () => {}
+  const handleRead = () => {};
   return (
-    <div>
-      <div sc_title>Updates</div>
+    <>
       <div className="socialCard">
-        <div className="header">
+        <div className="sc_header">
           <div className="friend">{friend}</div> reviewed
-          <div className="title">{title}</div>
+          <div className="sc_title">{title}</div>
         </div>
-        <div className="rating">
+        <div className="sc_rating">
+          Rating 
           <ReactStars
             count={5}
             onChange={ratingChanged}
             value={rating}
-            size={32}
+            size={26}
             activeColor="#FA604A"
           />
         </div>
-        <div className="review">{review}</div>
-        <div className="details">
-          <div className="thumbnail">
+        <div className="sc_review">{review}</div>
+        <div className="sc_details_block">
+          <div className="sc_thumbnail">
             <img src={thumbnail} alt={title} />
           </div>
           <div className="sc_details">
-            <div className="title">{title}</div>
-            by <div className="authors">{authors}</div>
+            <div className="sc_block_title">{title}</div>
+            <div style={{ display:"flex",gap:"3px" }}> by <div className="sc_authors">{author}</div></div>
             <button className="wanttoread" onClick={handleRead}>Want to Read</button>
-            <div className="description">{description}</div>
+            <div className="sc_description" dangerouslySetInnerHTML={{ __html: description.slice(0, 200) }}>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

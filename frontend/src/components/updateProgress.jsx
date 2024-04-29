@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import '../styles/updateProgress.css'
-const UpdateProgress = ({ id, currentPage, pageCount, review , displayUpdateProgressToggle, updateCurrentlyReading}) => {
+const UpdateProgress = ({ id, currentPage, pageCount, review , displayUpdateProgressToggle, updateCurrentlyReading,fetchCurrentlyReading}) => {
   const [cPage, setCPage] = useState(currentPage);
   const [reviewText, setReviewText] = useState(review);
   const [shelves, setShelves] = useState(1)
@@ -27,6 +27,9 @@ const UpdateProgress = ({ id, currentPage, pageCount, review , displayUpdateProg
   const handleUpdateCancel = () => {
     displayUpdateProgressToggle();
   };
+  useEffect(() => {
+    fetchCurrentlyReading();
+  },[])
   return (
     <div className="updateProgress">
       <div className="progressHeader">

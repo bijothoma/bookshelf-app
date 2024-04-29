@@ -1,0 +1,50 @@
+.socialCard {
+    border:1px solid #d8d8d8;
+    margin-top:20px;
+    padding:10px;
+}
+.sc_header{
+    display:flex;
+    align-items: center;
+    gap:5px;
+}
+.friend, .sc_title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.sc_rating{
+    display:flex;
+    align-items: center;
+    gap:5px;
+}
+.sc_details_block{
+    display:flex;
+    margin-top: 30px;
+    border:1px solid #d8d8d8;
+    padding:20px;
+    
+}
+.sc_details{
+    margin-left:20px;
+}
+.sc_block_title{
+    font-size:24px;
+    font-weight:bold;
+}
+.sc_authors{
+    font-weight: bold;
+}
+.wanttoread{
+    margin-top:20px;
+    width:150px;
+    height:30px;
+    border-radius: 5px;
+    background-color: #409d69;
+    border:none;
+    outline:none;
+}
+.sc_description p{
+    margin-top: 10px;
+    text-indent:20px;
+}

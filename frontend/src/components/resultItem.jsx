@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/resultItem.css";
 
-const ResultItem = ({ key,id, thumbnail, title, author, selectBook, hideListDiv }) => {
+const ResultItem = ({ id, thumbnail, title, author, selectBook, hideListDiv }) => {
   const handleClick = () => {
     selectBook(id)
     hideListDiv();

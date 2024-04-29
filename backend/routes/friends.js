@@ -4,20 +4,14 @@ const User = require('../models/user');
 
 router.post("/", async (req, res) => {
   try {
-    console.log("in friends route");
-    const userId = req.body.userId;
-    const friendId = req.body.friendId;
-    console.log("friend id: ", friendId);
-    const friend = await Friend.findOne({
-      userId: userId,
-      friendId: friendId,
-    });
+    const queryData = req.query;
+    const friend = await Friend.findOne(queryData);
     if (friend) {
       return res
         .status(409)
         .send({ message: "This person already exists in your friend list!" });
     }
-    await new Friend(userId, friendId).save();
+    await new Friend(queryData).save();
     res.status(201).send({ message: "Friend added successfully." });
   } catch (error) {
     res.status(500).send({ message: "Internal server error" + error });
