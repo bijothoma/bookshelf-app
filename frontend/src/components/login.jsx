@@ -32,7 +32,7 @@ const Login = () => {
     // }
     if (data.email === "") return;
     try {
-      const url = "http://localhost:8080/api/auth";
+      const url = `${process.env.REACT_APP_RENDER_PATH}/api/auth`;
       const { data: res } = await axios.post(url, {
         email: data.email,
         password: data.password,
@@ -57,7 +57,7 @@ const Login = () => {
     setAction("Sign Up");
     if (data.email === "") return;
     try {
-      const url = "http://localhost:8080/api/users";
+      const url = `${process.env.REACT_APP_RENDER_PATH}/api/users`;
       const { data: res } = await axios.post(url, data);
       console.log(res.message);
       setAction("Login");

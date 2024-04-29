@@ -58,7 +58,6 @@ const CurrentlyReadingBooks = () => {
         <div className="dashboard">
           <div className="currentlyReading">
             <div className="title">CURRENTLY READING</div>
-            <div>{data.length}</div>
             <div className="current">
               {data.map((book) => (
                 <CurrentlyReading
