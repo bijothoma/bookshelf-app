@@ -86,7 +86,7 @@ const CurrentlyReadingBooks = () => {
           <>
             <div className="title">Updates</div>
             <div>
-              {friendsData.map((book) => {
+              {friendsData?.map((book) => {
                 console.log(book.title);
                 return (
                   <SocialCard
