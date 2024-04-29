@@ -28,12 +28,7 @@ const CurrentlyReadingBooks = () => {
 
   const fetchSocialCardBooks = async () => {
     const tmp = await fetchReviewedBooks(userId, setReviewedBooks, setLoading2);
-    console.log(tmp);
     setFriendsData(tmp);
-    setTimeout(async () => {
-      console.log("Reviewed book : ", friendsData);
-      console.log("currently reading ", data);
-    }, 1000);
   };
 
   const updateCurrentlyReading = async (id, updateData) => {
