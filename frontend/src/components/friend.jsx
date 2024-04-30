@@ -10,8 +10,8 @@ import Spinner from "./spinner";
 const Friend = ({ friendsList }) => {
   const [notFriends, setNotFriends] = useState([]);
   const [friends, setFriends] = useState([]);
-  const [loading1  , setLoading1] = useState(true);
-  const [loading2  , setLoading2] = useState(true);  
+  const [loading1, setLoading1] = useState(true);
+  const [loading2, setLoading2] = useState(true);
   const [selectedId, setSelectedId] = useState();
   const { userId, setUserId } = useUser("");
 
@@ -45,7 +45,9 @@ const Friend = ({ friendsList }) => {
       <div className="friends_title">Add Friends here</div>
       <div className="friendSearch">
         <select className="friendSelect" onChange={handleSelect}>
-          <option value="" style={{ display:"none" }}>Select a friend from the list</option>
+          <option value="" style={{ display: "none" }}>
+            Select a friend from the list
+          </option>
           {notFriends.map((option, index) => (
             <option key={index} value={option._id}>
               {option.name}
@@ -60,12 +62,13 @@ const Friend = ({ friendsList }) => {
         {loading2 ? (
           <Spinner />
         ) : (
-          <div style={{ marginLeft:"30px",marginTop:"50px"  }}>
-            <div style={{ fontSize:"18px",fontWeight:"bold",}}>Friends List</div>
+          <div style={{ marginLeft: "30px", marginTop: "50px" }}>
+            <div style={{ fontSize: "18px", fontWeight: "bold" }}>
+              Friends List
+            </div>
             {friends?.map((friend) => (
               <div>{friend.friendId.name}</div>
             ))}
-
           </div>
         )}
       </div>

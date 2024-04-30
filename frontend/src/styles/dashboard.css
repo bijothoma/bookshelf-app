@@ -1,85 +1,81 @@
-.dashboard_container{
-    display:flex;
-    flex-wrap:wrap;
-    width:80%;
-    margin: 0 auto;
+.dashboard_container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+  margin: 0 auto;
 }
-.title{
-    font-size:18px;
-    font-weight: bold;
-    margin-top:20px;
-    /*margin-left:23px;*/
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
 }
-.currentlyReading, .socialCard_dashboard {
-    flex:1;
-    /* min-width:200px; */
-    padding:20px;
-
+.currentlyReading,
+.socialCard_dashboard {
+  flex: 1;
+  padding: 20px;
 }
-.currently-reading{
-    display:flex;
-    /* justify-content: space-between; */
-    margin-top:10px;
+.currently-reading {
+  display: flex;
+  margin-top: 10px;
 }
-.socialCard_dashboard{
+.socialCard_dashboard {
   flex-direction: column;
 }
 
-  .gr-book_title {
-    font-weight: bold;
-    font-size: 16px;
-    text-transform: uppercase;
-    word-wrap: break-word;
-    width:300px;
-  }
-  .cr-thumb-nail {
-    width: 100px;
-  }
+.gr-book_title {
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  word-wrap: break-word;
+  width: 300px;
+}
+.cr-thumb-nail {
+  width: 100px;
+}
 
-  .cr-thumbnail{
-    width:120%;
-  }
-  .cr-gr-book_details > * {
-    margin-left: 30px;
-  }
-  .gr-book-progress{
-    width:100%;
-  }
-  .progress{
-    height:30px;
-    width:150px;
-    border-radius: 10px;
-    font-size: 14px;
-    margin-left:0;
-    margin-right:0;
-    margin-top:20px;
-    cursor:pointer;
-    font-weight: bold;
-    border:none;
-  }
-  .progress:hover{
-    background-color: rgb(244, 234, 222);
-  }
-  .progressElement {
-    width: 200px; /* Set width */
-    height: 20px; /* Set height */
-    /* border: 1px solid #ccc; Add border */
-    border-radius: 5px; /* Add border radius */
-    background-color: #7ea985; /* Set background color */
-  }
-  
-  /* Custom styling for the progress bar */
-  .progressElement::-webkit-progress-bar {
-    background-color: #a9b8ab; /* Set background color */
-    border-radius: 5px; /* Add border radius */
-  }
-  
-  .progressElement::-webkit-progress-value {
-    background-color: #197A64; /* Set progress bar color */
-    border-radius: 5px; /* Add border radius */
-  }
-  
-  .progressBar {
-    display: flex;
-    gap:5px;
-  }
+.cr-thumbnail {
+  width: 120%;
+}
+.cr-gr-book_details > * {
+  margin-left: 30px;
+}
+.gr-book-progress {
+  width: 100%;
+}
+.progress {
+  height: 30px;
+  width: 150px;
+  border-radius: 10px;
+  font-size: 14px;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  border: none;
+}
+.progress:hover {
+  background-color: rgb(244, 234, 222);
+}
+.progressElement {
+  width: 200px;
+  height: 20px;
+  border-radius: 5px;
+  background-color: #7ea985;
+}
+
+/* Custom styling for the progress bar */
+.progressElement::-webkit-progress-bar {
+  background-color: #a9b8ab;
+  border-radius: 5px;
+}
+
+.progressElement::-webkit-progress-value {
+  background-color: #197a64;
+  border-radius: 5px;
+}
+
+.progressBar {
+  display: flex;
+  gap: 5px;
+}

@@ -20,19 +20,7 @@ app.use((req, res, next) => {
 
 //middleware
 app.use(express.json());
-app.use(cors({origin: "*"}))
-//{
-//   origin: "https://bookshelf-app-frontend.onrender.com/",
-// }
-
-// app.use((req,res,next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "https://bookshelf-app-frontend.onrender.com/");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   next();
-// });
+app.use(cors({ origin: "*" })); //for allowing request from any origin
 
 //routes
 app.use("/api/users", userRoutes);

@@ -1,13 +1,20 @@
 import React from "react";
 import "../styles/resultItem.css";
 
-const ResultItem = ({ id, thumbnail, title, author, selectBook, hideListDiv }) => {
+const ResultItem = ({
+  id,
+  thumbnail,
+  title,
+  author,
+  selectBook,
+  hideListDiv,
+}) => {
   const handleClick = () => {
-    selectBook(id)
+    selectBook(id);
     hideListDiv();
-  }
+  };
   return (
-    <div className="resultItemSearch" onClick = {handleClick}>
+    <div className="resultItemSearch" onClick={handleClick}>
       <div className="thumb-nail">
         <img src={thumbnail} alt="" className="thumbnail" />
       </div>

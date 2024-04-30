@@ -14,26 +14,26 @@ const MyBooksTableRow = ({
   shelves,
   removeBook,
   updateBook,
-  dateAdded
+  dateAdded,
 }) => {
   const handleRemove = () => {
     removeBook(id);
   };
   const updateTable = (name, value) => {
     const updateData = {
-      [name]:value
-    }
-    updateBook(id,updateData);
-  }
+      [name]: value,
+    };
+    updateBook(id, updateData);
+  };
   const ratingChanged = (newRating) => {
     updateTable("rating", newRating);
-  }
+  };
   // Format the date as "MMM dd, yy"
   const date = new Date(dateAdded);
-  const formattedDate = date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: '2-digit'
+  const formattedDate = date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
   });
   return (
     <div className="resultItemTable">
@@ -47,12 +47,14 @@ const MyBooksTableRow = ({
         <ReactStars
           count={5}
           onChange={ratingChanged}
-          value = {rating}
+          value={rating}
           size={32}
           activeColor="#ffd700"
         />
       </div>
-      <div className="book_shelves"><Shelves value={shelves} updateShelves = {updateTable}/></div>
+      <div className="book_shelves">
+        <Shelves value={shelves} updateShelves={updateTable} />
+      </div>
       <div className="book_addedDate">{formattedDate}</div>
       <div className="book_close" onClick={handleRemove}>
         <img

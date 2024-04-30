@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "../styles/bookshelf.css";
 import ResultItem from "./resultItem";
 import search_icon from "../assets/search.png";
-import { books } from "../api/data";
 import { searchBooks } from "../services/searchBooks";
 
 const SearchBar = ({ selectBook }) => {
@@ -10,7 +9,7 @@ const SearchBar = ({ selectBook }) => {
   const [listDisplay, setListDisplay] = useState(true);
   const [searchData, setSearchData] = useState([]);
   const handleInputChange = (e) => {
-    setListDisplay(true)
+    setListDisplay(true);
     setInput(e.target.value);
     if (input != "") {
       searchBooks(input, setSearchData);
@@ -31,8 +30,9 @@ const SearchBar = ({ selectBook }) => {
           onChange={handleInputChange}
         />
       </div>
-      <div className='listBooks'>
-        {input && listDisplay &&
+      <div className="listBooks">
+        {input &&
+          listDisplay &&
           searchData?.items
             ?.slice(0, 5)
             .map((book) => (
@@ -43,7 +43,7 @@ const SearchBar = ({ selectBook }) => {
                 author={book.volumeInfo?.authors?.join(", ")}
                 thumbnail={book.volumeInfo?.imageLinks?.thumbnail}
                 selectBook={selectBook}
-                hideListDiv = {hideListDiv}
+                hideListDiv={hideListDiv}
               />
             ))}
       </div>

@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "../styles/bookshelf.css";
 import SearchBar from "../components/searchBar";
-import { AddBookToMyShelf, fetchMergedData, RemoveBookFromShelf, UpdateBookFromShelf } from "../services/searchBooks";
+import {
+  AddBookToMyShelf,
+  fetchMergedData,
+  RemoveBookFromShelf,
+  UpdateBookFromShelf,
+} from "../services/searchBooks";
 import MyBooksTableRow from "../components/mybooksTableRow";
 import Spinner from "../components/spinner";
 import TableRowHead from "../components/tableRowHead";
@@ -12,7 +17,7 @@ const Bookshelf = () => {
   const [selectedBook, setSelectedBook] = useState(null);
   const [myBooks, setMyBooks] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [loadingCount,setLoadingCount] = useState(0);
+  const [loadingCount, setLoadingCount] = useState(0);
   //select book from the dropdown and add it to db. Also refresh the table.
   const selectBook = async (id) => {
     await AddBookToMyShelf(id, userId);
@@ -24,12 +29,12 @@ const Bookshelf = () => {
   };
   const updateBook = async (id, updateObject) => {
     setLoading(true);
-    await UpdateBookFromShelf(id,userId, updateObject,setLoading);
+    await UpdateBookFromShelf(id, userId, updateObject, setLoading);
     refreshTable();
-  }
+  };
   const refreshTable = async () => {
-      setLoading(true);
-      await fetchMergedData(userId,setMyBooks, setLoading);
+    setLoading(true);
+    await fetchMergedData(userId, setMyBooks, setLoading);
   };
 
   useEffect(() => {
@@ -43,8 +48,7 @@ const Bookshelf = () => {
         <Spinner />
       ) : (
         <div className="tableRows">
-          
-          {myBooks.length>0 && <TableRowHead />}
+          {myBooks.length > 0 && <TableRowHead />}
           {myBooks?.map((book) => {
             return (
               <MyBooksTableRow
@@ -56,9 +60,9 @@ const Bookshelf = () => {
                 avRating={book.averageRating}
                 rating={book.rating}
                 shelves={book.shelves}
-                removeBook = {removeBook}
+                removeBook={removeBook}
                 updateBook={updateBook}
-                dateAdded = {book.createdAt}
+                dateAdded={book.createdAt}
               />
             );
           })}

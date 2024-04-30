@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import Home from "./pages/home";
 import Bookshelf from "./pages/bookshelf";
@@ -40,10 +39,6 @@ const router = createBrowserRouter([
         path:"/about",
         element:<About />
       },
-      // {
-      //   path:"/login",
-      //   element: <Login />
-      // },
       {
         path:"/logout",
         element:<Logout />

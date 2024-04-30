@@ -30,7 +30,15 @@ const Navbar = () => {
         </svg>
         <div>
           {userName ? (
-            <div style={{ color: "lightYellow", fontSize:"18px", textAlign: "right",fontStyle:"italic", marginRight:"20px" }}>
+            <div
+              style={{
+                color: "lightYellow",
+                fontSize: "18px",
+                textAlign: "right",
+                fontStyle: "italic",
+                marginRight: "20px",
+              }}
+            >
               {userName}
             </div>
           ) : (

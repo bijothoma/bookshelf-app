@@ -4,7 +4,6 @@ import email_icon from "../assets/email.png";
 import password_icon from "../assets/password.png";
 import axios from "axios";
 import "../styles/login.css";
-import { Navigate } from "react-router-dom";
 import { useUser } from "../services/userContext";
 
 const Login = () => {
@@ -24,16 +23,8 @@ const Login = () => {
     setData({ ...data, [input.name]: input.value });
   };
 
-  useEffect(() => {
-    //document.getElementById('name').focus();
-  }, []);
-
   const handleLogin = async () => {
     setAction("Login");
-    // if (email === "bijothoma@gmail.com" && pwd === "123") {
-    //   localStorage.setItem("Email", email);
-    //   localStorage.setItem("Pwd", pwd);
-    // }
     if (data.email === "") return;
     try {
       const url = `${process.env.REACT_APP_RENDER_PATH}/api/auth`;
@@ -52,7 +43,7 @@ const Login = () => {
     } catch (error) {
       setError(error.response);
       resetData();
-      document.getElementById('name').focus();
+      document.getElementById("name").focus();
     }
   };
   const handleSignUp = async () => {
@@ -72,7 +63,7 @@ const Login = () => {
       ) {
         setError(error.response.data.message);
         resetData();
-        document.getElementById('name').focus();
+        document.getElementById("name").focus();
       }
     }
   };
@@ -97,7 +88,6 @@ const Login = () => {
               required
               placeholder="Name"
               onChange={handleChange}
-              
             />
           </div>
         )}
@@ -127,7 +117,6 @@ const Login = () => {
           />
         </div>
       </div>
-      {/* <div className="forgot_password">Forgot password<span>Click here</span></div> */}
       {error && <div className="error">{error}</div>}
       <div className="signin-buttons">
         <div

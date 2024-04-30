@@ -6,13 +6,9 @@ const Dashboard = () => {
   const [login, setLogin] = useState(false);
   useEffect(() => {
     const user = localStorage.getItem("userData");
-    setLogin(user? true : false);
-  },[])
-  return (
-    <div>
-      {login === true ? <CurrentlyReadingBooks /> : <Login />}
-    </div>
-  );
+    setLogin(user ? true : false);
+  }, []);
+  return <div>{login === true ? <CurrentlyReadingBooks /> : <Login />}</div>;
 };
 
 export default Dashboard;

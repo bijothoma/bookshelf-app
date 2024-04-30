@@ -9,43 +9,53 @@ const Shelves = ({ value, updateShelves }) => {
 
   // Function to handle radio button change
   const handleRadioButtonChange = (event) => {
-    const val = Number(event.target.value);    
+    const val = Number(event.target.value);
     setSelectedValue(val);
   };
   const handleVisibility = (event) => {
     setIsVisible(!isVisible);
-  }
+  };
   const handleClose = (event) => {
     setIsVisible(false);
-    if(value !== selectedValue){
-        updateShelves("shelves",selectedValue);
+    if (value !== selectedValue) {
+      updateShelves("shelves", selectedValue);
     }
-  }
+  };
   return (
     <div>
       {shelveValues[selectedValue]}
-      <div onClick={handleVisibility} style={{ cursor:"pointer" }}>[edit]</div>
+      <div onClick={handleVisibility} style={{ cursor: "pointer" }}>
+        [edit]
+      </div>
       {isVisible && (
-        
         <div
           style={{
             border: "1px solid black",
             padding: "10px",
             marginTop: "10px",
-            width:"180px",
-            display:"flex",
-            flexDirection:"column"
-            //position:"absolute"
+            width: "180px",
+            display: "flex",
+            flexDirection: "column",
           }}
         >
-        <div onClick={handleClose} style={{ cursor:"pointer",width:"100%",textAlign:'right',fontWeight:"bold"}}>close</div>
+          <div
+            onClick={handleClose}
+            style={{
+              cursor: "pointer",
+              width: "100%",
+              textAlign: "right",
+              fontWeight: "bold",
+            }}
+          >
+            close
+          </div>
           <label>
             <input
               type="radio"
               value="0"
               checked={selectedValue === 0}
               onChange={handleRadioButtonChange}
-              style={{ margin:"5px" }}
+              style={{ margin: "5px" }}
             />
             to-read
           </label>
@@ -55,7 +65,7 @@ const Shelves = ({ value, updateShelves }) => {
               value="1"
               checked={selectedValue === 1}
               onChange={handleRadioButtonChange}
-              style={{ margin:"5px" }}
+              style={{ margin: "5px" }}
             />
             currently-reading
           </label>
@@ -65,7 +75,7 @@ const Shelves = ({ value, updateShelves }) => {
               value="2"
               checked={selectedValue === 2}
               onChange={handleRadioButtonChange}
-              style={{ margin:"5px" }}
+              style={{ margin: "5px" }}
             />
             read
           </label>

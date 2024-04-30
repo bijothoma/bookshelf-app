@@ -126,7 +126,11 @@ export const fetchQueryData = async (
   }
 };
 
-export const fetchReviewedBooks = async (userId,setReviewedBooks, setLoading) => {
+export const fetchReviewedBooks = async (
+  userId,
+  setReviewedBooks,
+  setLoading
+) => {
   try {
     const url = `${process.env.REACT_APP_RENDER_PATH}/api/mybooks/getAllinArray/${userId}`;
     const response = await axios.get(url).then((res) => {
@@ -155,7 +159,7 @@ export const fetchNotFriends = async (userId, setNotFriends, setLoading) => {
   }
 };
 
-export const fetchFriends = async (userId,setFriends, setLoading) => {
+export const fetchFriends = async (userId, setFriends, setLoading) => {
   try {
     const url = `${process.env.REACT_APP_RENDER_PATH}/api/friends/getAll/${userId}`;
     const response = await axios.get(url).then((res) => {
@@ -169,13 +173,12 @@ export const fetchFriends = async (userId,setFriends, setLoading) => {
   }
 };
 
-
 export const AddFriend = async (userId, friendId) => {
   try {
     const friendData = {
       userId: userId,
-      friendId : friendId
-    }
+      friendId: friendId,
+    };
     const queryParams = new URLSearchParams(friendData).toString();
     const url = `${process.env.REACT_APP_RENDER_PATH}/api/friends?${queryParams}`;
     const { data: res } = await axios.post(url);

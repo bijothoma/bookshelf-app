@@ -1,19 +1,16 @@
-import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { useUser } from '../services/userContext';
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../services/userContext";
 
 const Logout = () => {
   const navigate = useNavigate();
-  const {userName, setUserName} = useUser();
-    useEffect(() => {
-        localStorage.removeItem("userData");
-        //window.location.href = '/dashboard';
-        navigate("/dashboard");
-        setUserName("");
-    },[])
-  return (
-    <div>logout</div>
-  )
-}
+  const { userName, setUserName } = useUser();
+  useEffect(() => {
+    localStorage.removeItem("userData");
+    navigate("/dashboard");
+    setUserName("");
+  }, []);
+  return <div>logout</div>;
+};
 
-export default Logout
+export default Logout;

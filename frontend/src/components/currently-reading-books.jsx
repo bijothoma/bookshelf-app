@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import CurrentlyReading from "./currently-reading";
-import { books } from "../api/data";
 import {
   fetchQueryData,
   UpdateBookFromShelf,
@@ -93,7 +92,7 @@ const CurrentlyReadingBooks = () => {
                     currentPage={book.currentPage}
                     review={book.review}
                     rating={book.rating}
-                    description= {book.description}
+                    description={book.description}
                   />
                 );
               })}

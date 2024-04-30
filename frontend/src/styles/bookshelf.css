@@ -1,43 +1,43 @@
-.searchBooks{
-    width:600px;
-    height:60px;
-    background-color: rgb(239, 229, 214);
-    display: flex;
-    align-items: center;
-    gap:5px;
-    margin:auto;
-    margin-top: 100px;
-    border-radius: 15px;
+.searchBooks {
+  width: 600px;
+  height: 60px;
+  background-color: rgb(239, 229, 214);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: auto;
+  margin-top: 100px;
+  border-radius: 15px;
 }
-.searchBooks input{
-    outline:none;
-    border:none;
-    height:30px;
-    border-radius: 6px;
-    width:530px;
-    font-size: 16px;
-    padding:5px;
+.searchBooks input {
+  outline: none;
+  border: none;
+  height: 30px;
+  border-radius: 6px;
+  width: 530px;
+  font-size: 16px;
+  padding: 5px;
 }
-.searchBooks img{
-    margin:0px 10px;
-    color:royalblue
+.searchBooks img {
+  margin: 0px 10px;
+  color: royalblue;
 }
-.listBooks{
-    display:flex;
-    margin:auto;
-    align-items: center;
-    flex-direction: column;
-    margin-left:10px;
+.listBooks {
+  display: flex;
+  margin: auto;
+  align-items: center;
+  flex-direction: column;
+  margin-left: 10px;
 }
 .visible {
-    display: block;
-  }
-  
-  .hidden {
-    display: none;
-  }
-.tableRows{
-    margin: 0 auto;
-    width:1200px;
-    margin-top:50px;
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+.tableRows {
+  margin: 0 auto;
+  width: 1200px;
+  margin-top: 50px;
 }

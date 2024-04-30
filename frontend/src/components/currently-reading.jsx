@@ -11,7 +11,7 @@ const CurrentlyReading = ({
   currentPage,
   review,
   updateCurrentlyReading,
-  fetchCurrentlyReading
+  fetchCurrentlyReading,
 }) => {
   const [progressDisplay, setProgressDisplay] = useState(false);
   const displayUpdateProgressToggle = () => {
@@ -48,8 +48,8 @@ const CurrentlyReading = ({
               pageCount={pageCount}
               review={review}
               displayUpdateProgressToggle={displayUpdateProgressToggle}
-              updateCurrentlyReading ={updateCurrentlyReading}
-              fetchCurrentlyReading = {fetchCurrentlyReading}
+              updateCurrentlyReading={updateCurrentlyReading}
+              fetchCurrentlyReading={fetchCurrentlyReading}
             />
           )}
         </div>

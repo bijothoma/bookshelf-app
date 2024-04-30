@@ -8,15 +8,11 @@ const ProgressBar = ({ pageCount, currentPage }) => {
         id="file"
         max={pageCount}
         value={currentPage}
-      >
-     
-      </progress>
+      ></progress>
       <div>
         {currentPage}/{pageCount}
       </div>
-      <div>
-        ({parseInt(currentPage*100/pageCount)}%)
-      </div>
+      <div>({parseInt((currentPage * 100) / pageCount)}%)</div>
     </div>
   );
 };

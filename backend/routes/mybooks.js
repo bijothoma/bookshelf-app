@@ -34,6 +34,7 @@ router.get("/getAll", async (req, res) => {
   }
 });
 
+//merging and creating custom object book
 const mergeBooks = async (myBooks) => {
   try {
     const ids = myBooks.map((book) => book.id);
@@ -84,6 +85,7 @@ router.get("/getAllMerged/:userId", async (req, res) => {
   }
 });
 
+//to get the books in the currently reading list by merging our books table with google api fields
 router.get("/getMergedBy", async (req, res) => {
   try {
     const queryData = req.query;
@@ -104,12 +106,17 @@ router.get("/getMergedBy", async (req, res) => {
 router.get("/getAllinArray/:userId", async (req, res) => {
   try {
     const userId = req.params.userId;
-    const friendIds =  await Friend.find({userId: userId}).select('-_id friendId').exec();
-    const friendIdsArray = friendIds.map(friend => friend.friendId);
+    const friendIds = await Friend.find({ userId: userId })
+      .select("-_id friendId")
+      .exec();
+    const friendIdsArray = friendIds.map((friend) => friend.friendId);
     const allBooks = await MyBooks.find({
       userId: { $in: friendIdsArray },
       review: { $ne: null, $ne: "" },
-    }).populate('userId').sort({ reviewedOn: -1 }).exec();    
+    })
+      .populate("userId")
+      .sort({ reviewedOn: -1 })
+      .exec();
     const mBooks = mergeBooks(allBooks);
     mBooks.then((data) => {
       res.json(data);
@@ -124,7 +131,6 @@ router.delete("/delete", async (req, res) => {
   try {
     // Extract the ID of the item to be removed from the request parameters
     const queryData = req.query;
-    //const itemId = req.params.id;
 
     // Find the book by ID and remove it from the database
     MyBooks.deleteOne(queryData).then((result) => {
