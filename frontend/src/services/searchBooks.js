@@ -132,7 +132,6 @@ export const fetchReviewedBooks = async (userId,setReviewedBooks, setLoading) =>
     const response = await axios.get(url).then((res) => {
       return res;
     });
-    console.log("fetch Social card : ", response.data);
     //return setReviewedBooks(response.data);
     return response.data;
   } catch (error) {

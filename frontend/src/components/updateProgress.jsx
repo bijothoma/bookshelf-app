@@ -5,7 +5,12 @@ const UpdateProgress = ({ id, currentPage, pageCount, review , displayUpdateProg
   const [reviewText, setReviewText] = useState(review);
   const [shelves, setShelves] = useState(1)
   const currentPageChange = (event) => {
-    setCPage(event.target.value);
+    if (Number(event.target.value) > pageCount) {
+      setCPage(pageCount);
+    } else {
+      setCPage(event.target.value);
+    }
+    
   };
   const handleReviewTextChange = (event) => {
     setReviewText(event.target.value);
@@ -34,11 +39,12 @@ const UpdateProgress = ({ id, currentPage, pageCount, review , displayUpdateProg
         <div>
           Currently on
           <input
-            type="text"
+            type="number"
             className="currentPage"
             value={cPage}
             max={pageCount}
             onChange={currentPageChange}
+            style={{ width:"50px" }}
           />
           of {pageCount}
         </div>
