@@ -78,4 +78,5 @@
 .progressBar {
   display: flex;
   gap: 5px;
+  margin-top:5px;
 }
