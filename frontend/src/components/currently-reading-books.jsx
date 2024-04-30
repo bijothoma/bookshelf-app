@@ -8,6 +8,7 @@ import {
 import "../styles/dashboard.css";
 import { useUser } from "../services/userContext";
 import SocialCard from "./socialCard";
+import Spinner from "./spinner";
 const CurrentlyReadingBooks = () => {
   const { userId, setUser } = useUser();
   const [friendsData, setFriendsData] = useState([]);
@@ -46,7 +47,7 @@ const CurrentlyReadingBooks = () => {
   return (
     <div className="dashboard_container">
       {loading1 ? (
-        <div>loading..</div>
+        <div><Spinner /></div>
       ) : (
         <div className="dashboard">
           <div className="currentlyReading">
@@ -73,7 +74,7 @@ const CurrentlyReadingBooks = () => {
       )}
       <div className="socialCard_dashboard">
         {loading2 ? (
-          <div>loading..</div>
+          <div><Spinner /></div>
         ) : (
           <>
             <div className="title">{friendsData?.length > 0 ? "Updates" : "No updates yet. Please add friends from the friends menu. Once they review a book, you can see it here."}</div>

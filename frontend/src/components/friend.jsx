@@ -42,7 +42,7 @@ const Friend = ({ friendsList }) => {
   }, []);
   return (
     <div className="friendPage">
-      <div className="friends_title">Add Friends here</div>
+      <div className="friends_title"><h1>Add Friends here</h1></div>
       <div className="friendSearch">
         <select className="friendSelect" onChange={handleSelect}>
           <option value="" style={{ display: "none" }}>
@@ -63,11 +63,11 @@ const Friend = ({ friendsList }) => {
           <Spinner />
         ) : (
           <div style={{ marginLeft: "30px", marginTop: "50px" }}>
-            <div style={{ fontSize: "18px", fontWeight: "bold" }}>
-              Friends List
+            <div >
+              <h2 style={{ borderBottom:"1px solid #dcd6cc" }}>Friends List</h2>
             </div>
             {friends?.map((friend) => (
-              <div>{friend.friendId.name}</div>
+              <div style={{ fontSize:"20px" }}>{friend.friendId.name}</div>
             ))}
           </div>
         )}
