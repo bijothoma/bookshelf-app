@@ -50,7 +50,7 @@ const CurrentlyReadingBooks = () => {
       ) : (
         <div className="dashboard">
           <div className="currentlyReading">
-            <div className="title">CURRENTLY READING</div>
+            <div className="title">{data?.length>0 ?"CURRENTLY READING" : "No books in Currently reading shelf. Please add some from my bookshelf menu and change the shelf to currently reading to see it here."}</div>
             <div className="current">
               {data.map((book) => (
                 <CurrentlyReading
@@ -76,7 +76,7 @@ const CurrentlyReadingBooks = () => {
           <div>loading..</div>
         ) : (
           <>
-            <div className="title">Updates</div>
+            <div className="title">{friendsData?.length > 0 ? "Updates" : "No updates yet. Please add friends from the friends menu. Once they review a book, you can see it here."}</div>
             <div>
               {friendsData?.map((book) => {
                 return (
