@@ -38,7 +38,7 @@
 .wanttoread {
   margin-top: 20px;
   width: 150px;
-  height: 30px;
+  height: 32px;
   border-radius: 5px;
   background-color: #409d69;
   border: none;
@@ -52,11 +52,11 @@
 .book_added {
   margin-top: 20px;
   width: 150px;
-  height: 30px;
+  height: 32px;
   border-radius: 5px;
   background-color: #bce8cf;
   border: none;
   outline: none;
   text-align: center;
-  font-weight: bold;
+  line-height: 32px;
 }

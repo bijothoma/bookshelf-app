@@ -48,7 +48,7 @@ const Bookshelf = () => {
         <Spinner />
       ) : (
         <div className="tableRows">
-          {myBooks.length > 0 && <TableRowHead />}
+          {myBooks?.length > 0 && <TableRowHead />}
           {myBooks?.map((book) => {
             return (
               <MyBooksTableRow

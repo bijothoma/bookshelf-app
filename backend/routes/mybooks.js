@@ -35,12 +35,18 @@ router.get("/getAll", async (req, res) => {
 });
 
 //merging and creating custom object book
-const mergeBooks = async (myBooks) => {
+const mergeBooks = async (myBooks, userId) => {
   try {
     const ids = myBooks.map((book) => book.id);
     const allGoogleBooks = await fetchBooksByIds(ids).then((books) => {
       return books;
     });
+    let myBookIds = [];
+    if (userId !== undefined) {
+      const books = await MyBooks.find({ userId: userId }).exec();
+      myBookIds = books.map(book => book.id)
+    }
+    console.log("my books : ",myBooks);
     const mergedBooks = myBooks.map((book) => {
       const details = allGoogleBooks.find((gBooks) => gBooks.id === book.id);
       return {
@@ -50,20 +56,22 @@ const mergeBooks = async (myBooks) => {
         rating: book.rating,
         shelves: book.shelves,
         createdAt: book.createdAt,
-        thumbnail: details.volumeInfo.imageLinks.thumbnail,
-        mediumPic: details.volumeInfo.imageLinks.thumbnail,
-        title: details.volumeInfo.title,
-        authors: details.volumeInfo.authors?.join(", "),
+        thumbnail: details?.volumeInfo.imageLinks.thumbnail,
+        mediumPic: details?.volumeInfo.imageLinks.thumbnail,
+        title: details?.volumeInfo.title,
+        authors: details?.volumeInfo.authors?.join(", "),
         averageRating:
-          details.volumeInfo.maturityRating === "NOT_MATURE"
+          details?.volumeInfo.maturityRating === "NOT_MATURE"
             ? "N/A"
-            : details.volumeInfo.averageRating,
-        pageCount: details.volumeInfo.pageCount,
-        description: details.volumeInfo.description,
+            : details?.volumeInfo.averageRating,
+        pageCount: details?.volumeInfo.pageCount,
+        description: details?.volumeInfo.description,
         currentPage: book.currentPage,
         review: book.review,
+        isInMyShelf: myBookIds?.length>0 ? myBookIds.includes(book.id) : false
       };
     });
+    
     return mergedBooks;
   } catch (error) {
     console.error(`Error fetching merged books`, error);
@@ -110,6 +118,7 @@ router.get("/getAllinArray/:userId", async (req, res) => {
       .select("-_id friendId")
       .exec();
     const friendIdsArray = friendIds.map((friend) => friend.friendId);
+    
     const allBooks = await MyBooks.find({
       userId: { $in: friendIdsArray },
       review: { $ne: null, $ne: "" },
@@ -117,8 +126,9 @@ router.get("/getAllinArray/:userId", async (req, res) => {
       .populate("userId")
       .sort({ reviewedOn: -1 })
       .exec();
-    const mBooks = mergeBooks(allBooks);
+    const mBooks = mergeBooks(allBooks,userId);
     mBooks.then((data) => {
+      console.log("merged books in social card : ", data);
       res.json(data);
     });
   } catch (error) {

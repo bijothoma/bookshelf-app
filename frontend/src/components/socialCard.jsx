@@ -17,9 +17,10 @@ const SocialCard = ({
   review,
   rating,
   description,
+  isInMyShelf
 }) => {
   const { userId, setUserId } = useUser();
-  const [bookAdded, setBookAdded] = useState(false);
+  const [bookAdded, setBookAdded] = useState(isInMyShelf);
   const ratingChanged = (newRating) => {};
   const addBook = async () => {
     await AddBookToMyShelf(id, userId);

@@ -94,6 +94,7 @@ const CurrentlyReadingBooks = () => {
                     review={book.review}
                     rating={book.rating}
                     description={book.description}
+                    isInMyShelf = {book.isInMyShelf}
                   />
                 );
               })}
