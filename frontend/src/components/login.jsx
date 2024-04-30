@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import person_icon from "../assets/person.png";
 import email_icon from "../assets/email.png";
 import password_icon from "../assets/password.png";
@@ -9,7 +9,7 @@ import { useUser } from "../services/userContext";
 
 const Login = () => {
   const { userId, setUser } = useUser();
-  const { userName, setUserName} = useUser();
+  const { userName, setUserName } = useUser();
   const [action, setAction] = useState("Login");
   const [data, setData] = useState({
     name: "",
@@ -24,6 +24,10 @@ const Login = () => {
     setData({ ...data, [input.name]: input.value });
   };
 
+  useEffect(() => {
+    //document.getElementById('name').focus();
+  }, []);
+
   const handleLogin = async () => {
     setAction("Login");
     // if (email === "bijothoma@gmail.com" && pwd === "123") {
@@ -37,29 +41,27 @@ const Login = () => {
         email: data.email,
         password: data.password,
       });
-      if(!res.data){
+      if (!res.data) {
         console.log(res.message);
-      } else{
-        console.log(res.data);
-        console.log("id : " ,res.data._id);
-        localStorage.setItem("userData",res.data);
+      } else {
+        localStorage.setItem("userData", res.data);
         setUser(res.data._id);
-        setUserName(res.data.name)
-        //window.location.reload(false);
-        window.location.href = '/';
+        setUserName(res.data.name);
+        window.location.href = "/";
       }
-      
     } catch (error) {
       setError(error.response);
+      resetData();
+      document.getElementById('name').focus();
     }
   };
   const handleSignUp = async () => {
     setAction("Sign Up");
+    setError("");
     if (data.email === "") return;
     try {
       const url = `${process.env.REACT_APP_RENDER_PATH}/api/users`;
       const { data: res } = await axios.post(url, data);
-      console.log(res.message);
       setAction("Login");
       resetData();
     } catch (error) {
@@ -69,6 +71,8 @@ const Login = () => {
         error.response.status <= 500
       ) {
         setError(error.response.data.message);
+        resetData();
+        document.getElementById('name').focus();
       }
     }
   };
@@ -93,6 +97,7 @@ const Login = () => {
               required
               placeholder="Name"
               onChange={handleChange}
+              
             />
           </div>
         )}

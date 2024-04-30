@@ -14,7 +14,6 @@ const SearchBar = ({ selectBook }) => {
     setInput(e.target.value);
     if (input != "") {
       searchBooks(input, setSearchData);
-      console.log(searchData?.items);
     }
   };
   const hideListDiv = () => {

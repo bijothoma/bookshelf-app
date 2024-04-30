@@ -28,15 +28,11 @@ const Bookshelf = () => {
     refreshTable();
   }
   const refreshTable = async () => {
-    //setTimeout(async() => {
       setLoading(true);
       await fetchMergedData(userId,setMyBooks, setLoading);
-      console.log(myBooks);
-    // }, 300);
   };
 
   useEffect(() => {
-    //fetchMergedData(userId, setMyBooks, setLoading);
     refreshTable();
   }, []);
 

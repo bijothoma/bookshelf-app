@@ -42,7 +42,6 @@ const mergeBooks = async (myBooks) => {
     });
     const mergedBooks = myBooks.map((book) => {
       const details = allGoogleBooks.find((gBooks) => gBooks.id === book.id);
-      //console.log(details);
       return {
         id: book.id,
         userId: book.userId._id,
@@ -74,8 +73,6 @@ const mergeBooks = async (myBooks) => {
 router.get("/getAllMerged/:userId", async (req, res) => {
   try {
     const userId = req.params.userId;
-    console.log("user Id : ", userId);
-    //const myBooks = await MyBooks.find({ userId: userId }).populate('user');
     const myBooks = await MyBooks.find({ userId: userId });
     const mBooks = mergeBooks(myBooks);
     mBooks.then((data) => {
@@ -90,13 +87,11 @@ router.get("/getAllMerged/:userId", async (req, res) => {
 router.get("/getMergedBy", async (req, res) => {
   try {
     const queryData = req.query;
-    console.log("query data : ", queryData);
     const myBooks = await MyBooks.find(queryData).then((res) => {
       return res;
     });
     const mBooks = mergeBooks(myBooks);
     mBooks.then((data) => {
-      //console.log("merged by : ",data);
       res.json(data);
     });
   } catch (error) {
@@ -109,23 +104,14 @@ router.get("/getMergedBy", async (req, res) => {
 router.get("/getAllinArray/:userId", async (req, res) => {
   try {
     const userId = req.params.userId;
-    //console.log("in getAllinArray userId : ",userId);
     const friendIds =  await Friend.find({userId: userId}).select('-_id friendId').exec();
     const friendIdsArray = friendIds.map(friend => friend.friendId);
-    //const friends = await Friend.find({userid: userId}).exec();
-    //const friendIds = friends.map(friend => friend.friendId);
-    console.log("friend ids : ", friendIdsArray);
-    // const allBooks = await MyBooks.find({
-    //   userId: { $in: friendIds },
-    //   review: { $ne: null, $exists: true, $ne: "" },
-    // }).populate('user').sort({ reviewedOn: -1 });
     const allBooks = await MyBooks.find({
       userId: { $in: friendIdsArray },
       review: { $ne: null, $ne: "" },
     }).populate('userId').sort({ reviewedOn: -1 }).exec();    
     const mBooks = mergeBooks(allBooks);
     mBooks.then((data) => {
-      console.log("respones data in getallinarray : " ,data);
       res.json(data);
     });
   } catch (error) {
@@ -159,11 +145,6 @@ router.put("/update", async (req, res) => {
   try {
     const queryData = req.query;
     const updateData = req.body; // Data to update, sent in the request body
-    console.log("query data : ", queryData);
-    console.log("update data : ", updateData);
-
-    // Find the item by ID and update it
-    // const updatedItem = await MyBooks.findByIdAndUpdate(itemId, updateData, { new: true });
     const updatedItem = await MyBooks.findOneAndUpdate(queryData, updateData);
 
     if (!updatedItem) {

@@ -48,3 +48,15 @@
     margin-top: 10px;
     text-indent:20px;
 }
+
+.book_added{
+    margin-top:20px;
+    width:150px;
+    height:30px;
+    border-radius: 5px;
+    background-color: #bce8cf;
+    border:none;
+    outline:none;
+    text-align: center;
+    font-weight: bold;
+}

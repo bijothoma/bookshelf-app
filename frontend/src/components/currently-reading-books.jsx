@@ -39,7 +39,6 @@ const CurrentlyReadingBooks = () => {
 
   useEffect(() => {
     fetchCurrentlyReading();
-    console.log("User id : ", userId);
   }, []);
 
   useEffect(() => {
@@ -81,7 +80,6 @@ const CurrentlyReadingBooks = () => {
             <div className="title">Updates</div>
             <div>
               {friendsData?.map((book) => {
-                console.log(book.title);
                 return (
                   <SocialCard
                     key={book.id}

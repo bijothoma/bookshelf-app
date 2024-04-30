@@ -40,7 +40,6 @@
     width:120%;
   }
   .cr-gr-book_details > * {
-    margin-top: 10px;
     margin-left: 30px;
   }
   .gr-book-progress{
@@ -48,12 +47,18 @@
   }
   .progress{
     height:30px;
-    width:200px;
+    width:150px;
     border-radius: 10px;
     font-size: 14px;
     margin-left:0;
     margin-right:0;
-    margin-top:20px
+    margin-top:20px;
+    cursor:pointer;
+    font-weight: bold;
+    border:none;
+  }
+  .progress:hover{
+    background-color: rgb(244, 234, 222);
   }
   .progressElement {
     width: 200px; /* Set width */

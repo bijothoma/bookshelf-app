@@ -27,7 +27,6 @@ const MyBooksTableRow = ({
   }
   const ratingChanged = (newRating) => {
     updateTable("rating", newRating);
-    console.log("New rating : " ,newRating);
   }
   // Format the date as "MMM dd, yy"
   const date = new Date(dateAdded);

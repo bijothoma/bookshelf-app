@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import '../styles/socialcard.css';
 import ReactStars from "react-rating-stars-component";
 import TextToggle from "./textToggle";
+import { useUser } from "../services/userContext";
+import { AddBookToMyShelf, UpdateBookFromShelf } from "../services/searchBooks";
 
 const SocialCard = ({
   id,
@@ -16,8 +18,16 @@ const SocialCard = ({
   rating,
   description
 }) => {
+  const {userId,setUserId} = useUser();
+  const [bookAdded, setBookAdded] = useState(false);
   const ratingChanged = (newRating) => {};
-  const handleRead = () => {};
+  const addBook = async () => {
+    await AddBookToMyShelf(id,userId);
+  }
+  const handleRead = () => {
+    addBook();
+    setBookAdded(true);
+  };
   return (
     <>
       <div className="socialCard">
@@ -43,9 +53,10 @@ const SocialCard = ({
           <div className="sc_details">
             <div className="sc_block_title">{title}</div>
             <div style={{ display:"flex",gap:"3px" }}> by <div className="sc_authors">{author}</div></div>
-            <button className="wanttoread" onClick={handleRead}>Want to Read</button>
-            <div className="sc_description" dangerouslySetInnerHTML={{ __html: description.slice(0, 200) }}>
-            </div>
+            {!bookAdded ? (<button className="wanttoread" onClick={handleRead}>Want to Read</button>) : (<div className="book_added">Book added</div>)}
+            {/* <div className="sc_description" dangerouslySetInnerHTML={{ __html: description.slice(0, 200) }}> </div>*/}
+            <TextToggle text={description.replace("<br>","")} maxLength={800} />
+            
           </div>
         </div>
       </div>

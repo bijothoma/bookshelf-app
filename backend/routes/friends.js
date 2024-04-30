@@ -19,22 +19,24 @@ router.post("/", async (req, res) => {
 });
 
 const getAllFriends = async (userId) => {
-  const allFriends = await Friend.find(userId);
+  const allFriends = await Friend.find(userId).populate({path:"friendId", select: "name"}).exec();
   return allFriends;
 };
 
-router.get("/getAll", async (req, res) => {
+router.get("/getAll/:userId", async (req, res) => {
   try {
-    const friends = getAllFriends(req.body.userId);
+    const userId = req.params.userId
+    const friends = await getAllFriends({userId : userId});
     res.json(friends);
   } catch (error) {
-    res.status(500).send({ message: "Internal server error" });
+    res.status(500).send({ message: "Internal server error" + error });
   }
 });
 
-router.get("/getNotFriends", async(req, res) => {
-    const friendIds = await Friend.find().select('id');
-    const notFriends = await User.find({id:{ $nin: friendIds }})
+router.get("/getNotFriends/:userId", async(req, res) => {
+    const userId = req.params.userId;
+    const friendIds = (await Friend.find({userId : userId}).then(res => res)).map(friend => friend.friendId);
+    const notFriends = await User.find({_id:{ $nin: [...friendIds, userId] }})
     res.json(notFriends);
 })
 

@@ -8,14 +8,12 @@ const UpdateProgress = ({ id, currentPage, pageCount, review , displayUpdateProg
     setCPage(event.target.value);
   };
   const handleReviewTextChange = (event) => {
-    console.log(reviewText)
     setReviewText(event.target.value);
   }
   const handleFinished = () => {
     setShelves(2)
   };
   const handleUpdateProgess = () => {
-    console.log("review : ", review);
     const updateData = {
       currentPage : cPage,
       shelves : shelves,
