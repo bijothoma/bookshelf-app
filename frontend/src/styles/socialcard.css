@@ -43,6 +43,7 @@
   background-color: #409d69;
   border: none;
   outline: none;
+  cursor: pointer;
 }
 .sc_description p {
   margin-top: 10px;
@@ -59,4 +60,5 @@
   outline: none;
   text-align: center;
   line-height: 32px;
+  cursor: default;
 }
