@@ -52,9 +52,11 @@ const Login = () => {
     if (data.email === "") return;
     try {
       const url = `${process.env.REACT_APP_RENDER_PATH}/api/users`;
-      const { data: res } = await axios.post(url, data);
-      setAction("Login");
-      resetData();
+      const { data: res } = await axios.post(url, data).then(res => {
+        setAction("Login");
+        resetData();
+      });
+      
     } catch (error) {
       if (
         error.response &&
@@ -78,7 +80,7 @@ const Login = () => {
         {action === "Login" ? (
           <div></div>
         ) : (
-          <div className="inputs">
+          <div className="inputs" style={{ marginTop:"20px" }}>
             <img src={person_icon} alt="" />
             <input
               type="text"
