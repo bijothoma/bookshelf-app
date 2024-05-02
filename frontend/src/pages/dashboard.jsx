@@ -5,7 +5,7 @@ import CurrentlyReadingBooks from "../components/currently-reading-books";
 const Dashboard = () => {
   const [login, setLogin] = useState(false);
   useEffect(() => {
-    const user = localStorage.getItem("userData");
+    const user = localStorage.getItem("userId");
     setLogin(user ? true : false);
   }, []);
   return <div>{login === true ? <CurrentlyReadingBooks /> : <Login />}</div>;

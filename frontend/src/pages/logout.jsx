@@ -6,7 +6,7 @@ const Logout = () => {
   const navigate = useNavigate();
   const { userName, setUserName } = useUser();
   useEffect(() => {
-    localStorage.removeItem("userData");
+    localStorage.removeItem("userId");
     navigate("/dashboard");
     setUserName("");
   }, []);

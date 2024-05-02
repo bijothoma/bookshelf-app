@@ -11,6 +11,7 @@ import SocialCard from "./socialCard";
 import Spinner from "./spinner";
 const CurrentlyReadingBooks = () => {
   const { userId, setUser } = useUser();
+  const {tokenValue} =useUser();
   const [friendsData, setFriendsData] = useState([]);
   const [data, setData] = useState([]);
   const [reviewedBooks, setReviewedBooks] = useState([]);
@@ -23,7 +24,7 @@ const CurrentlyReadingBooks = () => {
   };
 
   const fetchCurrentlyReading = () => {
-    fetchQueryData(queryData, setData, setLoading1);
+    fetchQueryData(queryData, setData, setLoading1,tokenValue);
   };
 
   const fetchSocialCardBooks = async () => {

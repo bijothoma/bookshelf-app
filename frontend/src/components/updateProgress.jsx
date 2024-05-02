@@ -18,6 +18,11 @@ const UpdateProgress = ({
     } else {
       setCPage(event.target.value);
     }
+    if (Number(event.target.value) < 0) {
+      setCPage(0);
+    } else {
+      setCPage(event.target.value);
+    }    
   };
   const handleReviewTextChange = (event) => {
     setReviewText(event.target.value);
@@ -48,6 +53,7 @@ const UpdateProgress = ({
           <input
             type="number"
             className="currentPage"
+            min={0}
             value={cPage}
             max={pageCount}
             onChange={currentPageChange}

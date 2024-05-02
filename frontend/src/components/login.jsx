@@ -9,6 +9,7 @@ import { useUser } from "../services/userContext";
 const Login = () => {
   const { userId, setUser } = useUser();
   const { userName, setUserName } = useUser();
+  const [loggedInStatus, SetLoggedInStatus] = useState(false);
   const [action, setAction] = useState("Login");
   const [data, setData] = useState({
     name: "",
@@ -24,6 +25,7 @@ const Login = () => {
   };
 
   const handleLogin = async () => {
+    
     setAction("Login");
     if (data.email === "") return;
     try {
@@ -32,18 +34,22 @@ const Login = () => {
         email: data.email,
         password: data.password,
       });
-      if (!res.data) {
-        console.log(res.message);
+      console.log("response : ", res.auth);
+      if (!res.auth) {
+        console.log("Decline message",res.message);
+        SetLoggedInStatus(false);
       } else {
-        localStorage.setItem("userData", res.data);
-        setUser(res.data._id);
-        setUserName(res.data.name);
+        console.log("Message : ", res);
+        SetLoggedInStatus(true);
+        localStorage.setItem("token", res.token);
+        setUser(res.result._id);
+        setUserName(res.result.name);
         window.location.href = "/";
       }
     } catch (error) {
       setError(error.response);
       resetData();
-      document.getElementById("name").focus();
+      //document.getElementById("name").focus();
     }
   };
   const handleSignUp = async () => {
@@ -69,6 +75,16 @@ const Login = () => {
       }
     }
   };
+  const checkAuthenticated = () => {
+    const url = `${process.env.REACT_APP_RENDER_PATH}/api/auth/getToken`;
+      axios.get(url, {
+        headers : {
+          "x-access-token" : ""//localStorage.getItem("token")
+        }
+      }).then(res => {
+        console.log("message : ",res);
+      });
+  }
   return (
     <div className="login-container">
       <div className="header">
@@ -133,6 +149,7 @@ const Login = () => {
         >
           Login
         </div>
+        {loggedInStatus && <button onClick={checkAuthenticated} >Authenticate</button>}
       </div>
     </div>
   );

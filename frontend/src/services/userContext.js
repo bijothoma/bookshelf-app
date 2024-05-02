@@ -5,6 +5,7 @@ const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [userId, setUserId] = useState(localStorage.getItem("userId") || "");
   const [userName, setName] = useState(localStorage.getItem("userName") || "");
+  const [tokenValue, setToken] = useState(localStorage.getItem("token") || '');
 
   const setUser = (id) => {
     localStorage.setItem("userId", id);
@@ -14,9 +15,13 @@ export const UserProvider = ({ children }) => {
     localStorage.setItem("userName", name);
     setName(name);
   };
+  const setTokenValue = (token) => {
+    localStorage.setItem("token", token);
+    setToken(token)
+  }
 
   return (
-    <UserContext.Provider value={{ userId, userName, setUser, setUserName }}>
+    <UserContext.Provider value={{ userId, userName, tokenValue, setUser, setUserName, setTokenValue }}>
       {children}
     </UserContext.Provider>
   );

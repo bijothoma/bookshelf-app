@@ -16,12 +16,14 @@
   text-align: center;
 }
 .review {
-  width: 100%;
+   width: 97%; 
   height: 180px;
   border: none;
   outline: none;
   font-size: 16px;
   text-align: left;
+  margin:0 5px;
+  border:1px solid #f4f1ea;
 }
 .charactersLeft {
   color: gray;

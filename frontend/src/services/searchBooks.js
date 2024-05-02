@@ -1,4 +1,6 @@
 import axios from "axios";
+
+
 export const searchBooks = async (txt, setSearchData) => {
   await fetch(
     `https://www.googleapis.com/books/v1/volumes?q=${txt}&key=${process.env.REACT_APP_GOOGLE_BOOKS_API_KEY}`
@@ -107,15 +109,21 @@ export const fetchMergedData = async (userId, setMyBooks, setLoading) => {
   }
 };
 
+//call the api to display Currently reading books
 export const fetchQueryData = async (
   queryData,
   setCurrentlyReading,
-  setLoading
+  setLoading,
+  token
 ) => {
   try {
     const queryParams = new URLSearchParams(queryData).toString();
     const url = `${process.env.REACT_APP_RENDER_PATH}/api/mybooks/getMergedBy?${queryParams}`;
-    const response = await axios.get(url).then((res) => {
+    const response = await axios.get(url,{
+      headers: {
+        "x-access-token": token
+      }
+    }).then((res) => {
       return res;
     });
     return setCurrentlyReading(response.data);

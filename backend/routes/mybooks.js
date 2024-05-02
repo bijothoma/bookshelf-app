@@ -6,6 +6,7 @@ const MyBooks = require("../models/mybooks");
 const Friend = require("../models/friend");
 const { query } = require("express");
 const { fetchBooksByIds } = require("../services/googlebooks");
+const verifyJWT = require("../services/verifyJWT");
 
 router.post("/", async (req, res) => {
   try {
@@ -46,7 +47,7 @@ const mergeBooks = async (myBooks, userId) => {
       const books = await MyBooks.find({ userId: userId }).exec();
       myBookIds = books.map(book => book.id)
     }
-    console.log("my books : ",myBooks);
+    //console.log("my books : ",myBooks);
     const mergedBooks = myBooks.map((book) => {
       const details = allGoogleBooks.find((gBooks) => gBooks.id === book.id);
       return {
@@ -128,7 +129,7 @@ router.get("/getAllinArray/:userId", async (req, res) => {
       .exec();
     const mBooks = mergeBooks(allBooks,userId);
     mBooks.then((data) => {
-      console.log("merged books in social card : ", data);
+      //console.log("merged books in social card : ", data);
       res.json(data);
     });
   } catch (error) {
