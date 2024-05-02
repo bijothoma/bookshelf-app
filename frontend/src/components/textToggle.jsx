@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const TextToggle = ({ text, maxLength }) => {
+const TextToggle = ({ text = "", maxLength }) => {
   const [showMore, setShowMore] = useState(false);
 
   const toggleShowMore = () => {
@@ -8,7 +8,7 @@ const TextToggle = ({ text, maxLength }) => {
   };
 
   // Split the text by '<p>' tags
-  const paragraphs = text.split("<p>");
+  const paragraphs = text?.split("<p>");
 
   return (
     <div style={{ lineBreak: "1.5" }}>
@@ -40,7 +40,7 @@ const TextToggle = ({ text, maxLength }) => {
         </>
       ) : (
         <>
-          {paragraphs[0] && paragraphs[0].length > maxLength ? (
+          {paragraphs?.[0] && paragraphs?.[0]?.length > maxLength ? (
             // If the first paragraph's length exceeds maxLength, display truncated text and a "More" button
             <>
               <p

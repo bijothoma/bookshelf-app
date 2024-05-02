@@ -12,7 +12,7 @@ const Friend = ({ friendsList }) => {
   const [friends, setFriends] = useState([]);
   const [loading1, setLoading1] = useState(true);
   const [loading2, setLoading2] = useState(true);
-  const [selectedId, setSelectedId] = useState();
+  const [selectedId, setSelectedId] = useState("");
   const { userId, setUserId } = useUser("");
 
   const getNotfriends = async () => {
@@ -34,6 +34,8 @@ const Friend = ({ friendsList }) => {
   const handleAdd = () => {
     if (selectedId !== "") {
       addThisFriend(selectedId);
+      setSelectedId("");
+      //document.getElementById("friendDrop").value  = ""
     }
   };
   useEffect(() => {
@@ -44,12 +46,12 @@ const Friend = ({ friendsList }) => {
     <div className="friendPage">
       <div className="friends_title"><h1>Add Friends here</h1></div>
       <div className="friendSearch">
-        <select className="friendSelect" onChange={handleSelect}>
-          <option value="" style={{ display: "none" }}>
+        <select id="friendDrop" className="friendSelect" onChange={handleSelect} >
+          <option value="" style={{ display: "none" }} disabled selected={selectedId === ""}>
             Select a friend from the list
           </option>
           {notFriends.map((option, index) => (
-            <option key={index} value={option._id}>
+            <option key={index} value={option._id} selected = {selectedId === option._id}>
               {option.name}
             </option>
           ))}

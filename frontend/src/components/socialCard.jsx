@@ -66,7 +66,7 @@ const SocialCard = ({
             )}
 
             <TextToggle
-              text={description.replace("<br>", "")}
+              text={description?.replace("<br>", "")}
               maxLength={800}
             />
           </div>
