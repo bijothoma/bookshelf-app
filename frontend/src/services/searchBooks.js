@@ -85,9 +85,7 @@ export const UpdateBookFromShelf = async (
     const queryParams = new URLSearchParams(paramData).toString();
     // Make PUT request to the API endpoint with the item ID and update data
     const url = `${process.env.REACT_APP_RENDER_PATH}/api/mybooks/update?${queryParams}`;
-    await axios.put(url, updateData).then((response) => {
-      console.log("Response data:", response.data);
-    });
+    await axios.put(url, updateData);
   } catch (error) {
     console.log("Error in updating this book.." + error);
   } finally {

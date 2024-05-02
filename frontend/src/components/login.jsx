@@ -34,12 +34,9 @@ const Login = () => {
         email: data.email,
         password: data.password,
       });
-      console.log("response : ", res.auth);
       if (!res.auth) {
-        console.log("Decline message",res.message);
         SetLoggedInStatus(false);
       } else {
-        console.log("Message : ", res);
         SetLoggedInStatus(true);
         localStorage.setItem("token", res.token);
         setUser(res.result._id);
@@ -81,8 +78,6 @@ const Login = () => {
         headers : {
           "x-access-token" : ""//localStorage.getItem("token")
         }
-      }).then(res => {
-        console.log("message : ",res);
       });
   }
   return (
